@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
+using System.Threading;
 using Octokit.Reactive.Clients;
 using Octokit.Reactive.Internal;
 
@@ -177,13 +178,14 @@ namespace Octokit.Reactive
         /// </summary>
         /// <param name="owner">The owner of the repository</param>
         /// <param name="name">The name of the repository</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>A <see cref="Repository"/></returns>
-        public IObservable<Repository> Get(string owner, string name)
+        public IObservable<Repository> Get(string owner, string name, CancellationToken cancellationToken = default)
         {
             Ensure.ArgumentNotNullOrEmptyString(owner, nameof(owner));
             Ensure.ArgumentNotNullOrEmptyString(name, nameof(name));
 
-            return _client.Get(owner, name).ToObservable();
+            return _client.Get(owner, name, cancellationToken).ToObservable();
         }
 
         /// <summary>

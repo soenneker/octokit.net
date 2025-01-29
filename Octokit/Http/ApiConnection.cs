@@ -49,13 +49,14 @@ namespace Octokit
         /// </summary>
         /// <typeparam name="T">Type of the API resource to get.</typeparam>
         /// <param name="uri">URI of the API resource to get</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public Task<T> Get<T>(Uri uri, CancellationToken cancellationToken = default)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
-            return Get<T>(uri, null);
+            return Get<T>(uri, null, cancellationToken);
         }
 
         /// <summary>
@@ -64,13 +65,14 @@ namespace Octokit
         /// <typeparam name="T">Type of the API resource to get.</typeparam>
         /// <param name="uri">URI of the API resource to get</param>
         /// <param name="parameters">Parameters to add to the API request</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public async Task<T> Get<T>(Uri uri, IDictionary<string, string> parameters)
+        public async Task<T> Get<T>(Uri uri, IDictionary<string, string> parameters, CancellationToken cancellationToken = default)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
-            var response = await Connection.Get<T>(uri, parameters, null).ConfigureAwait(false);
+            var response = await Connection.Get<T>(uri, parameters, null, cancellationToken).ConfigureAwait(false);
             return response.Body;
         }
 

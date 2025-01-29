@@ -29,7 +29,7 @@ namespace Octokit.Tests.Http
 
                 Assert.Same(response.Body, data);
                 var calls = connection.ReceivedCalls();
-                connection.Received().Get<object>(getUri, null, null);
+                connection.Received().Get<object>(getUri, null, null, CancellationToken.None);
             }
 
             [Fact]
