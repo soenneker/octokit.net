@@ -51,7 +51,7 @@ namespace Octokit
         /// <param name="uri">URI of the API resource to get</param>
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<T> Get<T>(Uri uri)
+        public Task<T> Get<T>(Uri uri, CancellationToken cancellationToken = default)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 

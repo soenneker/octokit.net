@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using Octokit.Clients;
+using System.Threading;
 
 namespace Octokit
 {
@@ -282,12 +283,12 @@ namespace Octokit
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A <see cref="Repository"/></returns>
         [ManualRoute("GET", "/repos/{owner}/{repo}")]
-        public Task<Repository> Get(string owner, string name)
+        public Task<Repository> Get(string owner, string name, CancellationToken cancellationToken = default)
         {
             Ensure.ArgumentNotNullOrEmptyString(owner, nameof(owner));
             Ensure.ArgumentNotNullOrEmptyString(name, nameof(name));
 
-            return ApiConnection.Get<Repository>(ApiUrls.Repository(owner, name), null);
+            return ApiConnection.Get<Repository>(ApiUrls.Repository(owner, name), cancellationToken);
         }
 
         /// <summary>
@@ -300,9 +301,9 @@ namespace Octokit
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A <see cref="Repository"/></returns>
         [ManualRoute("GET", "/repositories/{id}")]
-        public Task<Repository> Get(long repositoryId)
+        public Task<Repository> Get(long repositoryId, CancellationToken cancellationToken = default)
         {
-            return ApiConnection.Get<Repository>(ApiUrls.Repository(repositoryId));
+            return ApiConnection.Get<Repository>(ApiUrls.Repository(repositoryId), cancellationToken);
         }
 
         /// <summary>

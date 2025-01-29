@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Octokit
@@ -178,7 +179,7 @@ namespace Octokit
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A <see cref="Repository"/></returns>
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
-        Task<Repository> Get(string owner, string name);
+        Task<Repository> Get(string owner, string name, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the specified repository.
@@ -190,7 +191,7 @@ namespace Octokit
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A <see cref="Repository"/></returns>
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
-        Task<Repository> Get(long repositoryId);
+        Task<Repository> Get(long repositoryId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets all public repositories.

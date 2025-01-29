@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using NSubstitute;
 using Octokit.Internal;
@@ -471,7 +472,7 @@ namespace Octokit.Tests.Clients
 
                 connection.Received()
                     .Get<Repository>(Arg.Is<Uri>(u => u.ToString() == "repos/owner/name"),
-                    null);
+                        CancellationToken.None);
             }
 
             [Fact]

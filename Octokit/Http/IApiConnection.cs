@@ -27,7 +27,7 @@ namespace Octokit
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
-        Task<T> Get<T>(Uri uri);
+        Task<T> Get<T>(Uri uri, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the API resource at the specified URI.
